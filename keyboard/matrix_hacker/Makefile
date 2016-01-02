@@ -52,6 +52,9 @@ SRC =	keymap_common.c \
 	matrix.c \
 	led.c
 
+# program the board
+PROGRAM_CMD = avrdude -p atmega32u4 -P /dev/ttyACM0 -c avr109 -U flash:w:matrix_lufa.hex
+
 ifdef KEYMAP
     SRC := keymap_$(KEYMAP).c $(SRC)
 else
