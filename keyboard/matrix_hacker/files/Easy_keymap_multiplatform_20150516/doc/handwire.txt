@@ -1,0 +1,86 @@
+HOWTO: Easy AVR USB Keyboard Firmware - Using the hand-wired matrix
+metalliqaz@geekhack
+
+==============
+Introduction
+============
+
+Although Easy AVR USB firmware builds are programmable, the hardware details
+must be pre-compiled and incorporated into the tool.  Therefore, in order for
+a new hand-wired keyboard design to work with Easy AVR USB firmware, it must
+be wired according to this pre-defined description.
+
+For lack of a better standard layout, I have chosen the venerable Phantom
+hardware configuration as the default model for this layout.
+
+=======================
+Hardware Requirements
+=====================
+
+A Teensy 2.0, programmable with the Teensy Loader
+Up to 102 (6x17) switches
+Diodes for each switch
+Up to 2 LEDs, with matching resistors
+
+========================
+Electrical Connections
+======================
+
+Remember that diodes and LEDs are directional and must be installed with the
+correct orientation for the system to work.
+
+Diodes must be installed such that current flows from Row to Col.
+
+LEDs must be installed such that current flows from the pin to ground.
+
+=================
+Pin Assignments
+===============
+
+Note:
+Top left (typically Esc) is Row 0, Col 0
+Bottom right (typically arrow) is Row 5, Col 16
+
+The following assignments may be reconfigured by modifying the MATRIX section
+of the handwire_hardware.cfg file in the cfg directory.
+
+Row 0: B5
+Row 1: B4
+Row 2: B3
+Row 3: B2
+Row 4: B1
+Row 5: B0
+
+Col  0: D5
+Col  1: C7
+Col  2: C6
+Col  3: D4
+Col  4: D0
+Col  5: E6
+Col  6: F0
+Col  7: F1
+Col  8: F4
+Col  9: F5
+Col 10: F6
+Col 11: F7
+Col 12: D7
+Col 13: D6
+Col 14: D1
+Col 15: D2
+Col 16: D3
+
+LED0: B6
+LED1: B7
+
+=================
+Making a Layout
+===============
+
+Once the board is wired, each switch will have a (row,col) coordinate.  To 
+assign a key, find that coordinate in the keymapper application and assign
+your selected function.  The layout may be located anywhere within the 6x17
+matrix, as long as it fits.
+
+The layout view in the keymapper is configurable with .cfg files.  This step
+is purely cosmetic and is not required.  If you wish to customize the view,
+an example .cfg file is provided.

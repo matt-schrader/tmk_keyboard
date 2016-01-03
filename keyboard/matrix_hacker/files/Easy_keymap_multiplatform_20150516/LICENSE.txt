@@ -1,0 +1,24 @@
+LICENSE.txt
+
+By obtaining and using the "Easy AVR USB Keyboard Firmware Keymapper" software
+package (hereafter referred to simply as "software package"), you agree to the
+following license.
+
+You are hereby granted permission by the undersigned to use this software
+package for non-commercial and non-military purposes ONLY. I, the undersigned,
+reserve the right to distribution of the software package and all rights to the
+source code specific to "Easy AVR USB Keyboard Firmware Keymapper". A request
+for further permission may be requested and will be considered on an individual
+basis.
+
+This software comes with no warranty and the undersigned accepts no
+responsibility whatsoever for the functionality, or lack of functionality, of
+this software package.  You are responsible for using this software in a way
+that will not and could not cause harm to any person or property.
+
+Note for the compiled version:
+This software package contains source code and compiled binaries (Python and
+Tcl/Tk) that are covered by a separate license and not created or modified by
+the undersigned.  Those licenses still apply.  
+
+Signed, David Howland, creator and rights-holder.
