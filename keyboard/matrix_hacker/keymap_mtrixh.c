@@ -9,7 +9,7 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         FN3,  LSFT, Z,    X,    C,    V,   B,         N,   M,   COMM, DOT,  SLSH,  RSFT, FN4, \
         FN0,        LCTL, LALT, LGUI,      SPC,       SPC,      RGUI, RALT, RCTL,        FN1)
 };
+
 const uint16_t PROGMEM fn_actions[] = {
-    //[0] = ACTION_MODS_KEY(MOD_RCTL|MOD_RSFT, KC_ESC), // Task(RControl,RShift+Esc)
-    //[0] = ACTION_DEFAULT_LAYER_SET(0)  // set qwerty layout
+  
 };
