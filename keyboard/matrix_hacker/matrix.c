@@ -26,6 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "debug.h"
 #include "util.h"
 #include "matrix.h"
+#include "mcp23018.c"
 
 
 #ifndef DEBOUNCE
@@ -42,6 +43,21 @@ static void init_cols(void);
 static void unselect_rows(void);
 static void select_row(uint8_t row);
 
+bool mcp23018_status = true;
+void init_mcp() {
+  twi_init();
+
+  mcp23018_status = mcp23018_write_register(IOCON,0x00);
+
+  mcp23018_status = mcp23018_write_register(IODIRA, 0b00000000);
+  mcp23018_status = mcp23018_write_register(IODIRB, 0b11111110);
+
+  mcp23018_status = mcp23018_write_register(GPPUA, 0b00000000);
+  mcp23018_status = mcp23018_write_register(GPPUB, 0b11111110);
+
+  mcp23018_status = mcp23018_write_register(OLATA, 0b11111111);
+  mcp23018_status = mcp23018_write_register(GPPUB, 0b11111111);
+}
 
 inline
 uint8_t matrix_rows(void)
@@ -57,6 +73,8 @@ uint8_t matrix_cols(void)
 
 void matrix_init(void)
 {
+    init_mcp();
+
     // initialize row and col
     unselect_rows();
     init_cols();
@@ -157,15 +175,33 @@ static void  init_cols(void)
   PORTF |=  (1<<4);
 }
 
+#define CHECK_BIT(var,pos) ((var) & (1<<(pos)))
 static matrix_row_t read_cols(void)
 {
-  return (PINC&(1<<6) ? 0 : (1<<7)) |
-         (PIND&(1<<4) ? 0 : (1<<8)) |
-         (PIND&(1<<7) ? 0 : (1<<9)) |
-         (PINE&(1<<6) ? 0 : (1<<10)) |
-         (PINB&(1<<4) ? 0 : (1<<11)) |
-         (PINF&(1<<4) ? 0 : (1<<12)) |
-         (PINB&(1<<5) ? 0 : (1<<13));
+  uint8_t mcp_data = 0;
+  if(mcp23018_status) {
+    mcp23018_status = mcp23018_read_register(GPIOB, &mcp_data);
+    mcp_data = ~mcp_data;
+  }
+
+  if(mcp23018_status) {
+    return (CHECK_BIT(mcp_data, 1) ? (1<<0) : 0) |
+           (CHECK_BIT(mcp_data, 2) ? (1<<1) : 0) |
+           (CHECK_BIT(mcp_data, 3) ? (1<<2) : 0) |
+           (CHECK_BIT(mcp_data, 4) ? (1<<3) : 0) |
+           (CHECK_BIT(mcp_data, 5) ? (1<<4) : 0) |
+           (CHECK_BIT(mcp_data, 6) ? (1<<5) : 0) |
+           (CHECK_BIT(mcp_data, 7) ? (1<<6) : 0) |
+           (PINC&(1<<6) ? 0 : (1<<7)) |
+           (PIND&(1<<4) ? 0 : (1<<8)) |
+           (PIND&(1<<7) ? 0 : (1<<9)) |
+           (PINE&(1<<6) ? 0 : (1<<10)) |
+           (PINB&(1<<4) ? 0 : (1<<11)) |
+           (PINF&(1<<4) ? 0 : (1<<12)) |
+           (PINB&(1<<5) ? 0 : (1<<13));
+  } else {
+    return (PINC&(1<<6) ? 0 : (1<<7));
+  }
 }
 
 // Matrix keyboard Pro Micro row connections
@@ -173,16 +209,20 @@ static matrix_row_t read_cols(void)
 // pin:  F7  B1  B3  B2  B6
 static void unselect_rows(void)
 {
-    // Hi-Z(DDR:0, PORT:0) to unselect
-    DDRB  &= ~0b01001110;
-    PORTB &= ~0b01001110;
+  mcp23018_status = mcp23018_write_register(GPIOA,0xFF);
 
-    DDRF  &= ~0b10000000;
-    PORTF &= ~0b10000000;
+  // Hi-Z(DDR:0, PORT:0) to unselect
+  DDRB  &= ~0b01001110;
+  PORTB &= ~0b01001110;
+
+  DDRF  &= ~0b10000000;
+  PORTF &= ~0b10000000;
 }
 
 static void select_row(uint8_t row)
 {
+  mcp23018_status = mcp23018_write_register(GPIOA,0xFF & ~(1<<(row + 1)));
+
     // Output low(DDR:1, PORT:0) to select
     switch (row) {
         case 0:
