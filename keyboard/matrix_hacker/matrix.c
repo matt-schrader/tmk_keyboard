@@ -45,18 +45,26 @@ static void select_row(uint8_t row);
 
 bool mcp23018_status = true;
 void init_mcp() {
+  _delay_ms(100);
   twi_init();
 
   mcp23018_status = mcp23018_write_register(IOCON,0x00);
+  _delay_ms(1);
 
   mcp23018_status = mcp23018_write_register(IODIRA, 0b00000000);
+  _delay_ms(1);
   mcp23018_status = mcp23018_write_register(IODIRB, 0b11111110);
+  _delay_ms(1);
 
   mcp23018_status = mcp23018_write_register(GPPUA, 0b00000000);
+  _delay_ms(1);
   mcp23018_status = mcp23018_write_register(GPPUB, 0b11111110);
+  _delay_ms(1);
 
   mcp23018_status = mcp23018_write_register(OLATA, 0b11111111);
+  _delay_ms(1);
   mcp23018_status = mcp23018_write_register(GPPUB, 0b11111111);
+  _delay_ms(1);
 }
 
 inline
