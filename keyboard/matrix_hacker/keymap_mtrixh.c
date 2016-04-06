@@ -8,7 +8,7 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         FN2,  TAB,  A,    S,    D,    F,    G,         H,    J,    K,    L,    SCLN,  QUOT, ENT, \
         FN1,  LSFT, Z,    X,    C,    V,    B,         N,    M,   COMM,  DOT,  SLSH,  RSFT, MUTE, \
         FN0,        LCTL, LALT, LGUI,       SPC,       SPC,       RGUI,  RALT, RCTL,        MEDIA_PLAY_PAUSE),
-    /* 1 */
+    /* 1 arrow keys */
     KEYMAP(
         TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS,      TRNS, TRNS, TRNS, TRNS, TRNS,  TRNS, DEL, \
         TRNS, TRNS, TRNS, TRNS, UP,   TRNS, TRNS,      TRNS, TRNS, UP,   TRNS, TRNS,  TRNS, TRNS, \
@@ -16,20 +16,23 @@ const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS,      TRNS, TRNS, TRNS, TRNS, TRNS,  TRNS, TRNS, \
         TRNS,       TRNS, TRNS, TRNS,       TRNS,      TRNS,       TRNS, TRNS, TRNS,        TRNS),
 
-    /* 2 */KEYMAP(
+    /* 2 mouse */
+    KEYMAP(
         TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS,      TRNS,    MS_ACCEL0, MS_ACCEL1, MS_ACCEL2, TRNS,     TRNS, TRNS, \
         TRNS, TRNS, TRNS, TRNS, UP,   TRNS, TRNS,      TRNS,    MS_BTN1,   MS_UP,     MS_BTN2,   TRNS,     TRNS, TRNS, \
         TRNS, TRNS, TRNS, LEFT, DOWN, RGHT, TRNS,      MS_BTN3, MS_LEFT,   MS_DOWN,   MS_RIGHT,  MS_BTN4,  TRNS, TRNS, \
         TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS,      TRNS,    TRNS,      TRNS,      TRNS,      TRNS,     TRNS, TRNS, \
         TRNS,       TRNS, TRNS, TRNS,       TRNS,      TRNS,               TRNS,      TRNS,      TRNS,           TRNS),
-    /* 3 */
+
+    /* 3 layer switch */
     KEYMAP(
         TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS,      FN3,  FN4,  TRNS, TRNS, TRNS,  TRNS, TRNS, \
         TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS,      TRNS, TRNS, TRNS, TRNS, TRNS,  TRNS, TRNS, \
         TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS,      TRNS, TRNS, TRNS, TRNS, TRNS,  TRNS, TRNS, \
         TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS,      TRNS, TRNS, TRNS, TRNS, TRNS,  TRNS, TRNS, \
         TRNS,       TRNS, TRNS, TRNS,       TRNS,      TRNS,       TRNS, TRNS, TRNS,        TRNS),
-    /* 4 */
+
+    /* 4 windows/linux support */
     KEYMAP(
         TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS,      TRNS, TRNS, TRNS, TRNS, TRNS,  TRNS, TRNS, \
         TRNS, TRNS, TRNS, TRNS, TRNS, TRNS, TRNS,      TRNS, TRNS, TRNS, TRNS, TRNS,  TRNS, TRNS, \
